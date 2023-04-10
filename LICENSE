@@ -1,0 +1,31 @@
+Copyright © 2023 Ziawe Inc.
+The Open License v1.0.1
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+ONE: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+TWO: You must reference Ziawe Inc., as the "Origin" for the libraries and code you referenced in your software, the code being compiled or not.
+
+THREE: Software is provided "as is" see Appendix.
+
+FOUR: Ziawe Inc., reserves the right to revoke your use of the software legally at anytime, for any reason.  Any legal issues brought through forks, will be handled, through their respected forkers.
+
+FIVE: If, you are a corporation, business, or entity that sells, and/or profits from our code, you are required to email voucher@ziawe.com with the use of our code, in your code.
+
+SIX: Code is Free-to-Use, for personal use.
+
+SEVEN: You are free to add to this license as long as it does not modify or clash the existing license agreement. You are NOT allowed to modify the EXISTING text of this license. Additional agrements must be added as ADDENDUM and your entities's NAME, YEAR, followed by your TERMS.
+
+APPENDIX:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+ADDENDUM:
+Jon Caraveo 2023
+MUST USE StandardDiffusionAPI.com to use this project, and must have a VALID API from StandardDiffusionAPI.com, to use commercially or professionally.

@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: SDAPI
+Version: 0.0.1
+Summary: A package to interface with the StableDiffusionAPI.com API
+Author-email: Jonathan Caraveo <jon@ziawe.com>
+Project-URL: Homepage, https://StableDiffusionAPI.com
+Project-URL: GitHub, https://github.com/caraveo/SDAPI/
+Project-URL: Bug Tracker, https://github.com/Caraveo/SDAPI/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# SDAPI
+```
+import sys
+import os
+import StableDiffusionAPI as sdapi
+
+strapi = sdapi.StableDiffusionAPI("Moo", 1024, 1024, 1, "tractor.png")
+```

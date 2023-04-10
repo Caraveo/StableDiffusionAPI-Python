@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+src/SDAPI.egg-info/PKG-INFO
+src/SDAPI.egg-info/SOURCES.txt
+src/SDAPI.egg-info/dependency_links.txt
+src/SDAPI.egg-info/top_level.txt
+src/StableDiffusionAPI/StableDiffusionAPI.py
+src/StableDiffusionAPI/__init__.py
