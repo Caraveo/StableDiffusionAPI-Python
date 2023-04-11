@@ -7,15 +7,51 @@ from urllib.parse import urlparse
 import urllib.parse
 import http.client
 
-def StableDiffusionAPI(query2, width, height, samples, name):
+global key
+
+def SetKey(key2):
+    key = key2
+
+def SDAPI(query2, width, height, samples, name):
     query = urllib.parse.quote(query2)
     img = name
     conn = http.client.HTTPSConnection("stablediffusionapi.com")
     payload = ''
+
+    if width <= 512:
+        width = "512"
+        if width >= 1024:
+            width = "1024"
+        else:
+            parsed_width = urllib.parse.quote_from_bytes(width.to_bytes(5, 'little'))
+    else:
+        parsed_width = urllib.parse.quote_from_bytes(width.to_bytes(5, 'little'))
+
+    
+    if height <= 512:
+        height = "512"
+        if height >= 1024:
+            height = "1024"
+        else:
+            parsed_height = urllib.parse.quote_from_bytes(height.to_bytes(5, 'little'))
+    else:
+        parsed_height = urllib.parse.quote_from_bytes(height.to_bytes(5, 'little'))
+
+    try:
+        key
+        print("Key Set")
+        print(key)
+    except NameError:
+        print("No Key Error: No value detected, Set a key with SetKey()")
+        exit()
+
     headers = {
-    'key': 'XXXXXXXXXX'
+    'key': key
     }
+    # uriPrompt = str("/api/v3/text2img?prompt=" + query + "&width=" + parsed_width + "&height="+ parsed_height +"&samples=1")
     uriPrompt = str("/api/v3/text2img?prompt=" + query + "&width=512&height=512&samples=1")
+    
+    print(uriPrompt)
     conn.request("POST", uriPrompt, payload, headers)
     res = conn.getresponse()
     data = res.read()
