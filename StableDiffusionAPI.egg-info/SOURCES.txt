@@ -2,8 +2,8 @@ LICENSE
 MANIFEST.in
 README.md
 pyproject.toml
-StableDiffusionAPI/StableDiffusionAPI.py
 StableDiffusionAPI/__init__.py
+StableDiffusionAPI/calls.py
 StableDiffusionAPI.egg-info/PKG-INFO
 StableDiffusionAPI.egg-info/SOURCES.txt
 StableDiffusionAPI.egg-info/dependency_links.txt
