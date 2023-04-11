@@ -14,7 +14,7 @@ class StableDiffusionAPI:
         key = key
         print(key)
 
-    def SDAPI(query2, width, height, samples, name):
+    def Text2Img(query2, width, height, samples, name):
         query = urllib.parse.quote(query2)
         img = name
         conn = http.client.HTTPSConnection("stablediffusionapi.com")
