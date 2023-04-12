@@ -57,16 +57,16 @@ def Text2Img_Threader(query2, width, height, name):
     try:
         quote(check_height)
         quote(check_width)
-        print(f"{console_colors().SUCCESES}Height and Width are valid{console_colors.ENDC}")
+        print(f"{console_colors().SUCCESES}{name} Height and Width are valid{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}Height and Width are invalid{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name} Height and Width are invalid{console_colors.ENDC}")
         exit()
 
     try:
         key
-        print(f"{console_colors().SUCCESES}Key Set{console_colors.ENDC}")
+        print(f"{console_colors().SUCCESES}{name} Key Set{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name} No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
         exit()
 
     string_height_int = str(height)
@@ -120,14 +120,14 @@ def Text2Img_Threader(query2, width, height, name):
         if res.status == 200:
             with open(img, "wb") as f:
                 f.write(data)
-                print(f"{console_colors().SUCCESES} Image downloaded successfully! {console_colors.ENDC}")
+                print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
         else:
-            print(f"{console_colors().FAIL} Fetch1 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
+            print(f"{console_colors().FAIL}{name} Fetch1 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
         conn.close()
     else:
-        print(f"{console_colors().FAIL}No results{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name} No results{console_colors.ENDC}")
         timetotry = jrespone["eta"]
-        print(f"{console_colors().OK}Trying in: ", timetotry +  "{console_colors.ENDC}")
+        print(f"{console_colors().OK}{name} Trying in: ", timetotry +  "{console_colors.ENDC}")
         time.sleep(timetotry)
         conn.close()
         conn.request("POST", jrespone["fetch_result"], payload, headers)
@@ -163,11 +163,8 @@ def Text2Img_Threader(query2, width, height, name):
         if res.status == 200:
             with open(img, "wb") as f:
                 f.write(data)
-                print(f"{console_colors().SUCCESES}Image downloaded successfully! {console_colors.ENDC}")
+                print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
         else:
-            print(f"{console_colors().FAIL} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
+            print(f"{console_colors().FAIL}{name} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
         conn.close()
     conn.close()
-
-
-    
