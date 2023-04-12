@@ -26,9 +26,9 @@ def Text2Img(query2, width, height, name):
     try:
         thread = threading.Thread(target=Text2Img_Threader, args=(query2, width, height, name))
         thread.start()
-        print(f"{console_colors().SUCCESES}Successfully Started as Thread{console_colors.ENDC}")
+        print(f"{console_colors().SUCCESES}{name}: Successfully Started as Thread{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}Failed to start as Thread{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: Failed to start as Thread{console_colors.ENDC}")
 
 
 def Text2Img_Threader(query2, width, height, name):
@@ -56,16 +56,16 @@ def Text2Img_Threader(query2, width, height, name):
     try:
         quote(check_height)
         quote(check_width)
-        print(f"{console_colors().SUCCESES}{name} Height and Width are valid{console_colors.ENDC}")
+        print(f"{console_colors().SUCCESES}{name}: Height and Width are valid{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}{name} Height and Width are invalid{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: Height and Width are invalid{console_colors.ENDC}")
         exit()
 
     try:
         key
-        print(f"{console_colors().SUCCESES}{name} Key Set{console_colors.ENDC}")
+        # print(f"{console_colors().SUCCESES}{name} Key Set{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}{name} No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
         exit()
 
     string_height_int = str(height)
@@ -93,12 +93,12 @@ def Text2Img_Threader(query2, width, height, name):
         urlHost = url[0]
       
         uri = urlHost
-        print(urlHost)
+        #print(urlHost)
         parsed = urlparse(uri)
-        print(parsed)
+        #print(parsed)
 
         base = parsed.netloc
-        print(base)
+        #print(base)
 
         path = parsed.path
         #print(path)
@@ -112,9 +112,9 @@ def Text2Img_Threader(query2, width, height, name):
 
         download_img_Threader(base, path, name)
     else:
-        print(f"{console_colors().FAIL}{name} No results{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: No results{console_colors.ENDC}")
         timetotry = jrespone["eta"]
-        print(f"{console_colors().OK}{name} Trying in: {timetotry}{console_colors.ENDC}")
+        print(f"{console_colors().OK}{name}: Trying in: {timetotry}{console_colors.ENDC}")
         time.sleep(timetotry)
         conn.close()
         conn.request("POST", jrespone["fetch_result"], payload, headers)
@@ -147,12 +147,13 @@ def download_img_Threader(base, path, name):
     try:
         thread = threading.Thread(target=download_img, args=(base, path, name))
         thread.start()
-        print(f"{console_colors().SUCCESES}Successfully Started Download Thread{console_colors.ENDC}")
+        print(f"{console_colors().SUCCESES}{name}: Successfully Started Download Thread{console_colors.ENDC}")
     except:
-        print(f"{console_colors().FAIL}Failed to start Download Thread{console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: Failed to start Download Thread{console_colors.ENDC}")
 
 def download_img(base, path, name):
     time.sleep(1)
+    img = name
     conn = http.client.HTTPSConnection(base)
     payload = ''
     headers = {}
@@ -160,9 +161,9 @@ def download_img(base, path, name):
     res = conn.getresponse()
     data = res.read()
     if res.status == 200:
-        with open(name, "wb") as f:
+        with open(img, "wb") as f:
             f.write(data)
-            print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
+            print(f"{console_colors().SUCCESES}{name}: Image downloaded successfully! {console_colors.ENDC}")
     else:
-        print(f"{console_colors().FAIL}{name} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
+        print(f"{console_colors().FAIL}{name}: Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
     conn.close()
