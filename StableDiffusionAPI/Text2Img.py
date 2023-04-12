@@ -152,7 +152,7 @@ def download_img_Threader(base, path, name):
         print(f"{console_colors().FAIL}Failed to start Download Thread{console_colors.ENDC}")
 
 def download_img(base, path, name):
-    img = name
+    time.sleep(1)
     conn = http.client.HTTPSConnection(base)
     payload = ''
     headers = {}
@@ -160,7 +160,7 @@ def download_img(base, path, name):
     res = conn.getresponse()
     data = res.read()
     if res.status == 200:
-        with open(img, "wb") as f:
+        with open(name, "wb") as f:
             f.write(data)
             print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
     else:
