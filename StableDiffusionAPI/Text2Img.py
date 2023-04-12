@@ -8,7 +8,6 @@ from urllib.parse import quote
 import urllib.parse
 import http.client
 from StableDiffusionAPI import key as key
-
 class console_colors:
     HEADER = '\033[95m'
     OK = '\033[94m'
@@ -53,7 +52,6 @@ def Text2Img(query2, width, height, name):
     try:
         key
         print(f"{console_colors().SUCCESES}Key Set{console_colors.ENDC}")
-        print(key)
     except:
         print(f"{console_colors().FAIL}No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
         exit()
