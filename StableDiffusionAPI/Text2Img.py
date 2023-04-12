@@ -8,6 +8,8 @@ from urllib.parse import quote
 import urllib.parse
 import http.client
 from StableDiffusionAPI import key as key
+import threading
+
 class console_colors:
     HEADER = '\033[95m'
     OK = '\033[94m'
@@ -19,7 +21,18 @@ class console_colors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 def Text2Img(query2, width, height, name):
+    try:
+        thread = threading.Thread(target=Text2Img_Threader, args=(query2, width, height, name))
+        thread.start()
+        print(f"{console_colors().SUCCESES}Successfully Started as Thread{console_colors.ENDC}")
+        print(f"{console_colors().OKCYAN}Hello from Thread:{console_colors.ENDC}")
+    except:
+        print(f"{console_colors().FAIL}Failed to start as Thread{console_colors.ENDC}")
+
+
+def Text2Img_Threader(query2, width, height, name):
     query = quote(query2)
     img = name
     conn = http.client.HTTPSConnection("stablediffusionapi.com")
@@ -155,3 +168,6 @@ def Text2Img(query2, width, height, name):
             print(f"{console_colors().FAIL} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
         conn.close()
     conn.close()
+
+
+    
