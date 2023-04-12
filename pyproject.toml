@@ -3,7 +3,7 @@ install_requires = ['random', 'json', 'time', 'urllib3', 'http.client']
 build-backend = "setuptools.build_meta"
 [project]
 name = "StableDiffusionAPI"
-version = "0.0.3"
+version = "0.0.4"
 authors = [
   { name="Jonathan Caraveo", email="jon@ziawe.com" },
 ]
