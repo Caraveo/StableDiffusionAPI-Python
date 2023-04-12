@@ -27,7 +27,6 @@ def Text2Img(query2, width, height, name):
         thread = threading.Thread(target=Text2Img_Threader, args=(query2, width, height, name))
         thread.start()
         print(f"{console_colors().SUCCESES}Successfully Started as Thread{console_colors.ENDC}")
-        print(f"{console_colors().OKCYAN}Hello from Thread:{console_colors.ENDC}")
     except:
         print(f"{console_colors().FAIL}Failed to start as Thread{console_colors.ENDC}")
 
@@ -92,13 +91,14 @@ def Text2Img_Threader(query2, width, height, name):
         #print(jrespone["output"])
         url = jrespone["output"]
         urlHost = url[0]
+      
         uri = urlHost
-        #print(urlHost)
+        print(urlHost)
         parsed = urlparse(uri)
-        #print(parsed)
+        print(parsed)
 
         base = parsed.netloc
-        #print(base)
+        print(base)
 
         path = parsed.path
         #print(path)
@@ -110,24 +110,11 @@ def Text2Img_Threader(query2, width, height, name):
 
         conn.close()
 
-        conn = http.client.HTTPSConnection(base)
-        payload = ''
-        headers = {}
-        conn.request("GET", path, headers)
-        res = conn.getresponse()
-        data = res.read()
-
-        if res.status == 200:
-            with open(img, "wb") as f:
-                f.write(data)
-                print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
-        else:
-            print(f"{console_colors().FAIL}{name} Fetch1 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
-        conn.close()
+        download_img_Threader(base, path, name)
     else:
         print(f"{console_colors().FAIL}{name} No results{console_colors.ENDC}")
         timetotry = jrespone["eta"]
-        print(f"{console_colors().OK}{name} Trying in: ", timetotry +  "{console_colors.ENDC}")
+        print(f"{console_colors().OK}{name} Trying in: {timetotry}{console_colors.ENDC}")
         time.sleep(timetotry)
         conn.close()
         conn.request("POST", jrespone["fetch_result"], payload, headers)
@@ -152,19 +139,30 @@ def Text2Img_Threader(query2, width, height, name):
 
         conn.close()
 
-        conn = http.client.HTTPSConnection(base)
-        payload = ''
-        headers = {}
-        conn.request("GET", path, payload, headers)
-        res = conn.getresponse()
-        data = res.read()
+        download_img_Threader(base, path, name)
+    conn.close()
 
 
-        if res.status == 200:
-            with open(img, "wb") as f:
-                f.write(data)
-                print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
-        else:
-            print(f"{console_colors().FAIL}{name} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
-        conn.close()
+def download_img_Threader(base, path, name):
+    try:
+        thread = threading.Thread(target=download_img, args=(base, path, name))
+        thread.start()
+        print(f"{console_colors().SUCCESES}Successfully Started Download Thread{console_colors.ENDC}")
+    except:
+        print(f"{console_colors().FAIL}Failed to start Download Thread{console_colors.ENDC}")
+
+def download_img(base, path, name):
+    img = name
+    conn = http.client.HTTPSConnection(base)
+    payload = ''
+    headers = {}
+    conn.request("GET", path, payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    if res.status == 200:
+        with open(img, "wb") as f:
+            f.write(data)
+            print(f"{console_colors().SUCCESES}{name} Image downloaded successfully! {console_colors.ENDC}")
+    else:
+        print(f"{console_colors().FAIL}{name} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
     conn.close()
