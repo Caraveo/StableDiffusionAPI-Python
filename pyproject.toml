@@ -3,7 +3,7 @@ install_requires = ['random', 'json', 'time', 'urllib3', 'http.client']
 build-backend = "setuptools.build_meta"
 [project]
 name = "StableDiffusionAPI"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="Jonathan Caraveo", email="jon@ziawe.com" },
 ]
@@ -20,4 +20,4 @@ classifiers = [
 "Homepage" = "https://StableDiffusionAPI.com"
 "GitHub" = "https://github.com/caraveo/SDAPI/"
 "Bug Tracker" = "https://github.com/Caraveo/SDAPI/issues"
-
+"Guide" = "https://www.sparkandwave.com/stablediffusionapi/"
