@@ -9,6 +9,17 @@ import urllib.parse
 import http.client
 from StableDiffusionAPI import key as key
 
+class console_colors:
+    HEADER = '\033[95m'
+    OK = '\033[94m'
+    OKCYAN = '\033[96m'
+    SUCCESES = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def Text2Img(query2, width, height, name):
     query = quote(query2)
     img = name
@@ -34,61 +45,57 @@ def Text2Img(query2, width, height, name):
     try:
         quote(check_height)
         quote(check_width)
-        print("Height and Width are valid")
+        print(f"{console_colors().SUCCESES}Height and Width are valid{console_colors.ENDC}")
     except:
-        print("Height and Width are invalid")
+        print(f"{console_colors().FAIL}Height and Width are invalid{console_colors.ENDC}")
         exit()
 
     try:
         key
-        print("Key Set")
+        print(f"{console_colors().SUCCESES}Key Set{console_colors.ENDC}")
         print(key)
     except:
-        print("No Key Error: No value detected, Set a key with SetKey()")
+        print(f"{console_colors().FAIL}No Key Error: No value detected, Set a key with{console_colors.ENDC} {console_colors().OKCYAN}SetKey(){console_colors.ENDC}")
         exit()
 
-
-    #convert bytes to int
     string_height_int = str(height)
     string_width_int = str(width)
 
-    print(string_height_int)
-    print(string_width_int)
+    #print(string_height_int)
+    #print(string_width_int)
     
     headers = {
     'key': key.value
     }
     uriPrompt = str("/api/v3/text2img?prompt=" + query + "&width=" + string_width_int + "&height="+ string_height_int +"&samples=1")
     
-    print(uriPrompt)
+    #print(uriPrompt)
     conn.request("POST", uriPrompt, payload, headers)
     res = conn.getresponse()
     data = res.read()
-    print(data)
+    #print(data)
 
     jrespone = json.loads(data)
 
     if jrespone["output"]:
-        print(jrespone["output"])
+        #print(jrespone["output"])
         url = jrespone["output"]
         urlHost = url[0]
         uri = urlHost
-        print (urlHost)
-
+        #print(urlHost)
         parsed = urlparse(uri)
-
-        print(parsed)
+        #print(parsed)
 
         base = parsed.netloc
-        print(base)
+        #print(base)
 
         path = parsed.path
-        print(path)
+        #print(path)
 
         with_path = base + '/'.join(path.split('/')[:-1])
-        print(with_path)
+        #print(with_path)
 
-        print(path.split('/')) 
+        #print(path.split('/')) 
 
         conn.close()
 
@@ -102,41 +109,35 @@ def Text2Img(query2, width, height, name):
         if res.status == 200:
             with open(img, "wb") as f:
                 f.write(data)
-                print("Image downloaded successfully!")
+                print(f"{console_colors().SUCCESES} Image downloaded successfully! {console_colors.ENDC}")
         else:
-            print(f"Error downloading image: {response.status} {response.reason}")
+            print(f"{console_colors().FAIL} Fetch1 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
         conn.close()
     else:
-        print("No results")
-        print(jrespone["fetch_result"])
+        print(f"{console_colors().FAIL}No results{console_colors.ENDC}")
         timetotry = jrespone["eta"]
-        print("Trying in: ", timetotry)
+        print(f"{console_colors().OK}Trying in: ", timetotry +  "{console_colors.ENDC}")
         time.sleep(timetotry)
         conn.close()
         conn.request("POST", jrespone["fetch_result"], payload, headers)
         fetchResponse = conn.getresponse()
         fetchData = fetchResponse.read()
-
         jFetchData = json.loads(fetchData)
-
         jFetch = jFetchData["output"]
-
-        print(jFetch)
+        #print(jFetch)
 
         parsed = urlparse(jFetch[0])
-
-        print(parsed)
+        #print(parsed)
 
         base = parsed.netloc
-        print(base)
+        #print(base)
 
         path = parsed.path
-        print(path)
+        #print(path)
 
         with_path = base + '/'.join(path.split('/')[:-1])
-        print(with_path)
-
-        print(path.split('/')) 
+        #print(with_path)
+        #print(path.split('/')) 
 
         conn.close()
 
@@ -151,8 +152,8 @@ def Text2Img(query2, width, height, name):
         if res.status == 200:
             with open(img, "wb") as f:
                 f.write(data)
-                print("Image downloaded successfully!")
+                print(f"{console_colors().SUCCESES}Image downloaded successfully! {console_colors.ENDC}")
         else:
-            print(f"Error downloading image: {response.status} {response.reason}")
+            print(f"{console_colors().FAIL} Fetch2 Error downloading image: {res.status} {res.reason} {console_colors.ENDC}")
         conn.close()
     conn.close()
